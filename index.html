@@ -1,0 +1,789 @@
+<title>Test Gossip Harbor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Gossip Harbor avis 2026 : notre test complet après 3 semaines de jeu. Note, énergie gratuite, microtransactions, conseils et alternatives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&display=swap">
+<style>
+/* Layout : header mobi.gg › hero sombre plein écran › nav d'ancres sticky › grille article (gauche) + sidebar sticky (droite) */
+:root{
+  --bg:#f3f7fa; --surface:#ffffff; --soft:#eef5f7; --ink:#1c2632; --muted:#5f6d7b; --line:#e1e9ef;
+  --teal:#13c2b3; --blue:#2a88e4; --grad:linear-gradient(90deg,#13c2b3,#2a88e4);
+  --night:#121a24; --night2:#1b2633; --on-night:#eef3f7; --on-night-muted:#9aabbb;
+  --good:#17b27a; --warn:#e9a23b; --bad:#e04459; --orange:#ec5b24;
+  --chip-teal:#e3f7f5; --chip-red:#fdeef0; --chip-amber:#fdf4e4;
+  --f:"Red Hat Display",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:18px; --shadow:0 6px 24px rgba(28,52,74,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f151c; --surface:#17202a; --soft:#1c2733; --ink:#e7eef4; --muted:#9aaab9; --line:#26323f;
+  --night:#0b1118; --night2:#16202b; --chip-teal:#123432; --chip-red:#3a1d23; --chip-amber:#3a2e18;
+  --shadow:0 6px 24px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f151c; --surface:#17202a; --soft:#1c2733; --ink:#e7eef4; --muted:#9aaab9; --line:#26323f;
+  --night:#0b1118; --night2:#16202b; --chip-teal:#123432; --chip-red:#3a1d23; --chip-amber:#3a2e18;
+  --shadow:0 6px 24px rgba(0,0,0,.35); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.65}
+a{color:var(--blue)}
+h1,h2,h3{text-wrap:balance;line-height:1.2;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ph{display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(45deg,var(--soft),var(--soft) 10px,var(--surface) 10px,var(--surface) 20px);border:1.5px dashed var(--line);border-radius:14px;color:var(--muted);font-size:13px;font-weight:700;padding:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 22px;font:800 15px var(--f);text-decoration:none;cursor:pointer;color:#fff;background:var(--grad)}
+.btn:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn.ghost{background:var(--surface);color:var(--blue);box-shadow:inset 0 0 0 2px var(--line)}
+
+/* header mobi.gg */
+.top{background:var(--surface)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:86px}
+.brand{display:flex;align-items:center;gap:2px;text-decoration:none;flex:none}
+.bw{font-weight:900;font-size:30px;font-style:italic;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:.9}
+.bw small{display:block;font-size:17px;margin-left:16px}
+.mainnav{display:flex;gap:26px;font-weight:500;font-size:17px;flex:1;overflow-x:auto;scrollbar-width:none}
+.mainnav a{color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.mainnav a.cur{font-weight:800}
+.mainnav svg{width:16px;height:16px;fill:currentColor;flex:none}
+.car{font-size:12px}
+.search{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--soft);color:var(--orange);display:grid;place-items:center;cursor:pointer;margin-left:auto}
+.logo{font-weight:900;font-size:24px;letter-spacing:-.5px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.crumbband{background:linear-gradient(90deg,#13c2b3,#2a9be0 55%,#2a88e4);color:#fff}
+.crumbband .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:46px;flex-wrap:wrap;padding-block:6px}
+.crumb{font-size:14px;font-weight:500;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb a{color:#fff;text-decoration:none}
+.crumb b{font-weight:800}
+.socials{display:flex;align-items:center;gap:18px;font-weight:800}
+.socials a{color:#fff;text-decoration:none;font-size:15px}
+.toggle{width:48px;height:26px;border-radius:999px;border:0;background:#fff;position:relative;cursor:pointer;margin-left:18px}
+.toggle span{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#12304a;transition:left .2s}
+.toggle span::after{content:"☀";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:12px}
+:root[data-theme="dark"] .toggle span{left:25px}
+:root[data-theme="dark"] .toggle span::after{content:"☾"}
+@media (max-width:860px){.mainnav{display:none}.socials a{display:none}}
+
+/* hero : visuel plein cadre + voile sombre */
+.hero{position:relative;color:#fff;overflow:hidden;background:#0d1b2a}
+.hero-art{position:absolute;inset:0;display:grid;place-items:center end;padding-right:6%;text-align:right;font-size:13px;font-weight:700;color:rgba(255,255,255,.4);background:radial-gradient(700px 360px at 78% 40%,#2f7fb8,transparent 70%),radial-gradient(500px 300px at 95% 80%,#c75c8e,transparent 70%),linear-gradient(120deg,#0e2235,#183f5c 55%,#1f4f66)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,14,22,.85) 0%,rgba(8,14,22,.45) 55%,rgba(8,14,22,.1)),linear-gradient(0deg,rgba(8,14,22,.8),transparent 45%)}
+.hero .wrap{position:relative;z-index:1}
+.hero-in{padding-block:92px 0}
+.hero h1{font-size:clamp(30px,4.4vw,48px);font-weight:800;letter-spacing:-.3px;max-width:24ch;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 12px}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #fff;border-radius:999px;padding:3px 14px;font-size:14px;font-weight:500;color:#fff;text-decoration:none;background:rgba(0,0,0,.25)}
+.pill svg{width:15px;height:15px;fill:currentColor}
+.pill.dl{background:linear-gradient(90deg,#13c2b3,#2a9be0);border-color:transparent}
+.tags{font-size:15px;letter-spacing:1px;opacity:.92}
+.gametabs{display:flex;gap:0;overflow-x:auto;margin-top:58px;scrollbar-width:none}
+.gametabs a{color:#fff;text-decoration:none;font-size:18px;padding:12px 16px 16px;white-space:nowrap;border-right:1.5px solid rgba(255,255,255,.7);line-height:1}
+.gametabs a:last-child{border-right:0}
+.gametabs a:first-child{padding-left:0;text-transform:uppercase}
+
+/* carte note joueurs (sidebar) */
+.prate .head{position:relative;display:flex;align-items:center;gap:16px;padding:22px 20px;color:#fff;background:linear-gradient(90deg,rgba(10,18,28,.9),rgba(10,18,28,.55)),radial-gradient(300px 160px at 90% 30%,#c75c8e,transparent 70%),linear-gradient(120deg,#183f5c,#24506a)}
+.oring{--v:58;width:76px;aspect-ratio:1;border-radius:50%;flex:none;background:conic-gradient(from 200deg,#f6c445,#ec5b24 calc(var(--v)*1%),rgba(255,255,255,.18) 0);display:grid;place-items:center}
+.oring span{width:62px;aspect-ratio:1;border-radius:50%;background:#16212d;display:grid;place-items:center;text-align:center;line-height:1}
+.oring b{font-size:22px;font-weight:900}
+.oring small{display:block;font-size:10px;font-weight:600;margin-top:2px;opacity:.85}
+.prate .head strong{font-size:19px;font-weight:800;line-height:1.2}
+.prate .body{padding:14px 16px 18px}
+.rate-l{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;color:var(--muted);margin-bottom:12px}
+.rate-l span{color:var(--orange);font-size:24px;font-weight:900}
+.rate{display:flex;align-items:stretch;background:var(--chip-teal);border-radius:999px;overflow:hidden}
+.rate .lab{background:var(--orange);color:#fff;font-weight:800;font-size:13px;padding:8px 12px;display:grid;place-items:center;flex:none}
+.rate button{flex:1;min-width:20px;border:0;border-left:1px solid var(--line);background:transparent;font:600 12px var(--f);color:var(--muted);padding:8px 0;cursor:pointer}
+.rate button:hover{background:rgba(236,91,36,.15)}
+.rate button.on{background:var(--orange);color:#fff}
+.gametabs a.on{position:relative}
+.gametabs a.on::before{content:"";position:absolute;top:0;left:18px;width:22px;height:3px;background:#fff;border-radius:2px}
+
+/* sticky anchors */
+.anchors{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:12px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.anchors .bar{display:flex;justify-content:space-between;gap:4px;background:var(--surface);border-radius:16px;padding:8px;box-shadow:var(--shadow);scrollbar-width:none}
+@media (max-width:760px){.anchors .bar{overflow-x:auto;justify-content:flex-start}}
+.anchors a{white-space:nowrap;font-weight:700;font-size:14px;color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:10px}
+.anchors a.on{background:var(--grad);color:#fff}
+
+/* grid */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:36px;padding-block:18px 60px;align-items:start}
+main{min-width:0;display:flex;flex-direction:column;gap:44px}
+aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);display:flex;flex-direction:column;gap:16px}
+@media (max-width:980px){.layout,.hero .wrap{grid-template-columns:1fr}aside{position:static}.hero .ph{display:none}}
+
+/* article */
+section{scroll-margin-top:96px}
+.h2{font-size:clamp(24px,3vw,32px);font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;padding-bottom:12px;position:relative;margin-bottom:18px}
+.h2::after{content:"";position:absolute;left:0;bottom:0;width:86px;height:5px;border-radius:3px;background:var(--grad)}
+h3{font-size:20px;font-weight:800;margin:22px 0 8px}
+p{margin:0 0 14px;color:var(--muted);max-width:70ch}
+p b,li b{color:var(--ink)}
+.intro p:first-of-type::first-letter{float:left;font-size:92px;line-height:.82;font-weight:500;color:var(--blue);margin:6px 14px 0 0}
+.intro-grid{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:24px;align-items:center}
+@media (max-width:620px){.intro-grid{grid-template-columns:1fr}}
+.ring{--v:62;width:150px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--teal),var(--blue) calc(var(--v)*1%),var(--line) 0);display:grid;place-items:center;margin:0 auto}
+.ring span{width:122px;aspect-ratio:1;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:44px;font-weight:900;color:var(--blue)}
+.ring-l{text-align:center;font-weight:800;color:var(--blue);margin-top:6px}
+
+.author{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;font-size:14px;flex-wrap:wrap}
+.av{width:52px;height:52px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:900;font-size:20px;flex:none;position:relative}
+.av::after{content:"✓";position:absolute;right:-3px;top:-3px;width:18px;height:18px;border-radius:50%;background:var(--good);font-size:11px;display:grid;place-items:center;border:2px solid var(--surface)}
+.author .who{flex:1;min-width:200px;color:var(--muted);line-height:1.45}
+.author .who b{color:var(--ink)}
+.author .when{font-size:13px;color:var(--muted);text-align:right}
+.transp{margin-top:10px;font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.transp summary{cursor:pointer;padding:10px 14px;font-weight:700}
+.transp div{padding:0 14px 12px}
+
+.verdict{background:linear-gradient(135deg,var(--chip-teal),var(--surface));border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:16px;padding:22px 24px}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:var(--teal)}
+.verdict p{color:var(--ink);margin:10px 0 16px}
+
+.shots{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px}
+.shots .ph{flex:0 0 190px;height:110px}
+.shots .ph.play{background:var(--night2);color:#fff;border-color:transparent}
+
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+.kv th{width:42%;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);background:var(--soft);font-weight:800}
+.kv td{font-weight:700}
+td.n{font-weight:900;white-space:nowrap;font-variant-numeric:tabular-nums}
+.lo{color:var(--bad)} .mid{color:var(--warn)} .hi{color:var(--good)}
+tr.total td{background:var(--soft);font-weight:800}
+
+.procon{position:relative;background:var(--night);border-radius:28px;padding:34px 40px;display:grid;grid-template-columns:1fr 1fr;gap:28px;color:var(--on-night);transform:rotate(-1deg)}
+.procon > div{transform:rotate(1deg)}
+.procon h3{color:#fff;font-size:24px;margin:0 0 6px;padding-bottom:10px;position:relative}
+.procon h3::after{content:"";position:absolute;left:0;bottom:0;width:48px;height:4px;border-radius:2px;background:var(--grad)}
+.procon ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:12px}
+.procon li{display:flex;gap:10px;font-size:16px;line-height:1.4}
+.procon li::before{content:"+";flex:none;width:18px;height:18px;border-radius:4px;background:var(--blue);display:grid;place-items:center;font-weight:900;font-size:14px;margin-top:2px}
+.procon .neg li::before{content:"−";background:var(--teal)}
+@media (max-width:620px){.procon{grid-template-columns:1fr;padding:26px 22px;transform:none}.procon>div{transform:none}}
+
+.steps{counter-reset:s;display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--muted)}
+.steps li::before{content:counter(s);width:36px;height:36px;border-radius:50%;background:var(--grad);color:#fff;font-weight:900;display:grid;place-items:center}
+.steps li b{display:block;color:var(--ink);margin-bottom:2px}
+.stores{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0}
+
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tip{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.tip .k{font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.tip h3{font-size:17px;margin:8px 0 6px}
+.tip p{font-size:15px;margin:0}
+
+.callout{display:flex;gap:14px;background:var(--chip-amber);border-radius:14px;padding:14px 18px;font-size:15px;color:var(--ink);align-items:flex-start}
+.callout.red{background:var(--chip-red)}
+.callout .i{font-weight:900;flex:none}
+
+.energy{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;background:var(--night);color:var(--on-night);border-radius:20px;padding:22px 24px;margin-top:16px}
+.energy p{color:var(--on-night-muted);margin:4px 0 0}
+.energy b{color:#fff;font-size:19px}
+@media (max-width:620px){.energy{grid-template-columns:1fr}}
+
+.chars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.char{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.char .ph{height:120px;border-radius:0;border:0;border-bottom:1px solid var(--line)}
+.char div:last-child{padding:14px 16px}
+.char b{font-size:17px}
+.char small{display:block;color:var(--teal);font-weight:800;font-size:12px;letter-spacing:.8px;text-transform:uppercase}
+.char p{font-size:14.5px;margin:6px 0 0}
+
+.quote{background:var(--chip-teal);border-radius:28px;padding:28px 32px 22px;position:relative;margin-left:24px}
+.quote::before{content:"”";position:absolute;left:-24px;top:-20px;width:50px;height:50px;border-radius:50%;background:var(--grad);color:#fff;font-size:44px;font-weight:900;display:grid;place-items:center;line-height:1;padding-top:14px}
+.quote p{font-style:italic;font-size:19px;color:var(--muted);margin:0 0 12px}
+.quote .by{display:flex;align-items:center;gap:10px;color:var(--blue);font-weight:700}
+.quote .by .av{width:34px;height:34px;font-size:13px}
+.quote .by .av::after{display:none}
+
+.bilan{background:var(--night);border-radius:22px;padding:22px}
+.bilan .in{display:grid;grid-template-columns:180px 1fr;gap:28px;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;align-items:center}
+.bilan .big{text-align:center}
+.bilan .big b{font-size:72px;font-weight:900;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bilan .big span{font-size:26px;color:var(--on-night-muted);font-weight:800}
+.bilan .big small{display:block;font-size:12px;font-weight:900;letter-spacing:1.4px;color:var(--teal);margin-top:6px}
+.bilan h2{color:#fff;font-size:24px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:14px}
+.bilan p{color:var(--on-night-muted)}
+.bilan mark{background:rgba(19,194,179,.16);color:var(--teal);font-weight:800;padding:1px 6px;border-radius:6px}
+.bilan ul{color:var(--on-night);margin:0;padding-left:20px;display:grid;gap:6px}
+@media (max-width:620px){.bilan .in{grid-template-columns:1fr;padding:20px}}
+
+.vs{background:var(--night);border-radius:22px;padding:28px;color:#fff}
+.vs h3{text-align:center;margin:0 0 22px;font-size:22px}
+.vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center}
+.vs-card{border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:22px 18px;text-align:center;position:relative;background:var(--night2)}
+.vs-card.rec{border-color:var(--teal);background:linear-gradient(180deg,rgba(19,194,179,.16),var(--night2))}
+.vs-card .badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);font-size:11px;font-weight:900;letter-spacing:1px;padding:4px 10px;border-radius:6px}
+.ico{width:64px;height:64px;border-radius:16px;margin:0 auto 10px;display:grid;place-items:center;font-weight:900;font-size:22px;color:#fff;background:var(--grad)}
+.vs-score{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
+.vs-score small{color:var(--on-night-muted);font-weight:700;font-size:13px}
+.mini.dk{background:conic-gradient(var(--teal),var(--blue) calc(var(--v)*1%),rgba(255,255,255,.15) 0)}
+.mini.dk span{background:var(--night2);color:#fff}
+.btn.ghost-d{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.3)}
+.vs-table{overflow-x:auto;margin-top:26px;border-radius:16px;border:1px solid rgba(255,255,255,.12)}
+.vs-table table{font-size:14.5px;min-width:520px}
+.vs-table th,.vs-table td{border-bottom:1px solid rgba(255,255,255,.08);color:var(--on-night-muted)}
+.vs-table thead th{background:rgba(255,255,255,.05);color:#fff}
+.vs-table thead th:nth-child(3){background:linear-gradient(90deg,rgba(19,194,179,.25),rgba(42,136,228,.25))}
+.vs-table td:first-child{color:#fff;font-weight:700;white-space:nowrap}
+.vs-table td.win{color:#fff;font-weight:700}
+.vs-table td.win::before{content:"✓ ";color:var(--teal);font-weight:900}
+.vs-verdict{color:var(--on-night-muted);margin:18px 0 0;max-width:none}
+.vs-verdict b{color:var(--teal)}
+.vs-card ul{list-style:none;padding:0;margin:12px 0 16px;color:var(--on-night-muted);font-size:14px;display:grid;gap:6px}
+.vs-card li::before{content:"✓ ";color:var(--teal);font-weight:900}
+.vs-mid{font-size:30px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stars{color:var(--warn);font-weight:800}
+@media (max-width:620px){.vs-grid{grid-template-columns:1fr}.vs-mid{text-align:center}}
+
+.alts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.alt{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}
+.alt .ico{width:54px;height:54px;font-size:18px;margin:0}
+.alt b{font-size:16px}
+.alt p{font-size:13.5px;margin:0;flex:1}
+.alt .btn{padding:8px 14px;font-size:13px;margin-top:6px}
+
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+.faq summary{cursor:pointer;padding:16px 18px;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";font-size:22px;color:var(--blue);line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 18px 4px}
+
+.final{background:linear-gradient(120deg,#0d1b2a,#13324a 60%,#0f3b44);color:#fff;border-radius:0;padding-block:28px}
+.final .wrap{display:grid;grid-template-columns:200px 1fr 220px;gap:28px;align-items:center}
+.final .ring span{background:#0d1b2a;color:#fff}
+.final .ring-l{color:#fff;font-size:26px}
+.fbars{display:grid;gap:8px}
+.fbar{height:30px;border-radius:999px;background:var(--grad);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;padding:0 12px;white-space:nowrap}
+.fdl{display:grid;gap:10px;text-align:center}
+.fdl b{font-size:22px}
+.fdl a{background:#fff;color:#2a88e4;border-radius:999px;padding:9px;font-weight:800;text-decoration:none}
+@media (max-width:820px){.final .wrap{grid-template-columns:1fr}}
+
+.bio{display:flex;gap:18px;background:var(--surface);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.bio .av{width:82px;height:82px;font-size:28px}
+.bio p{font-size:14.5px;margin:6px 0 0}
+.similar{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.sim{display:grid;grid-template-columns:96px 1fr 60px;gap:14px;align-items:center;background:var(--surface);border-radius:20px;padding:14px;box-shadow:var(--shadow)}
+.sim .ph{height:96px;font-size:11px}
+.sim b{color:var(--blue);font-size:17px;line-height:1.2}
+.sim small{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.mini{width:52px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--teal),var(--blue) calc(var(--v)*1%),var(--line) 0);display:grid;place-items:center}
+.mini span{width:42px;aspect-ratio:1;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-weight:900;color:var(--blue);font-size:15px}
+
+/* sidebar */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.card .pad{padding:16px 18px}
+.card h4{margin:0 0 12px;font-size:15px;font-weight:800;display:flex;gap:8px;align-items:center}
+.score-top{background:var(--grad);color:#fff;text-align:center;padding:14px;font-weight:900;font-size:20px;letter-spacing:.3px}
+.score-dark{background:var(--night);color:#fff;margin:14px;border-radius:14px;padding:18px}
+.score-dark .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.score-dark .num{font-size:44px;font-weight:900;line-height:1}
+.score-dark .num span{font-size:18px;color:var(--on-night-muted)}
+.score-dark .sum{text-align:right;font-size:11px;font-weight:900;letter-spacing:1px;color:var(--on-night-muted)}
+.score-dark .sum em{display:block;font-style:normal;background:var(--teal);color:#fff;padding:5px 10px;border-radius:6px;margin-top:6px}
+.score-dark hr{border:0;border-top:1px solid rgba(255,255,255,.12);margin:14px 0}
+.score-dark .pl{font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--on-night-muted)}
+.score-dark .pl b{color:var(--warn)}
+.score-dark small{display:block;color:var(--on-night-muted);font-size:12px}
+.side-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 14px 10px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--soft);font-size:14px;font-weight:700}
+.side-row small{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);font-weight:800}
+.side-row .warn{color:var(--bad)}
+.card .btn{display:flex;margin:4px 14px 16px;border-radius:12px}
+.bars{display:grid;gap:10px}
+.bars .l{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.bars .l b{font-variant-numeric:tabular-nums}
+.bars .t{height:6px;border-radius:3px;background:var(--line);margin-top:4px;overflow:hidden}
+.bars .t i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--bad),var(--warn))}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;font-weight:600;background:var(--chip-teal)}
+.chip.r{background:var(--chip-red)} .chip.a{background:var(--chip-amber)}
+.sep{border-top:1px solid var(--line)}
+.info{display:grid;gap:8px;font-size:14px}
+.info div{display:flex;gap:8px}
+.info span{color:var(--muted);min-width:94px}
+.info b{font-weight:700}
+.tipcard{background:linear-gradient(160deg,var(--night),var(--night2));color:var(--on-night-muted);border-radius:var(--r);padding:20px;text-align:center;font-size:14px}
+.tipcard .eyebrow{color:var(--warn);display:block;margin-bottom:8px}
+.tipcard .btn{background:var(--warn);color:#1c2632;padding:8px 16px;font-size:13px;margin-top:12px}
+.adph{height:250px}
+
+.comments{background:var(--surface);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.comments textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:12px;padding:12px;font:15px var(--f);background:var(--bg);color:var(--ink);margin:12px 0}
+footer{background:var(--night);color:var(--on-night-muted);text-align:center;font-size:13px;padding-block:28px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#" aria-label="Mobi.gg accueil">
+    <svg viewBox="0 0 48 40" width="46" height="38" aria-hidden="true"><rect x="3" y="9" width="30" height="24" rx="6" transform="rotate(-18 18 21)" fill="#9aa7b4"/><rect x="6" y="11" width="24" height="18" rx="4" transform="rotate(-18 18 21)" fill="#fff"/><path d="M11 21h6M14 18v6" stroke="#e04459" stroke-width="2.4" stroke-linecap="round" transform="rotate(-18 18 21)"/><circle cx="24" cy="17" r="1.8" fill="#2a88e4"/><circle cx="26" cy="22" r="1.8" fill="#13c2b3"/></svg>
+    <span class="bw">Mobi<small>.gg</small></span>
+  </a>
+  <nav class="mainnav" aria-label="Principal">
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-4 1-6 1-9z"/></svg>News</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3zm4 4v2h7V8z"/></svg>Astuces &amp; Guides</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M6 3h12v3h3c0 4-2 6-5 6a5 5 0 0 1-3 3v3h4v3H7v-3h4v-3a5 5 0 0 1-3-3c-3 0-5-2-5-6h3z"/></svg>Tops</a>
+    <a href="#" class="cur"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7L18.3 22 12 18l-6.3 4 1.6-7.7L2 9.6 9 9z"/></svg>Tests</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M3 9h18v4H3zm1 4h16v8H4zm7-4h2v12h-2zM12 9C9 9 7 4 9.5 4S12 9 12 9s.5-5 2.5-5S15 9 12 9z"/></svg>Codes</a>
+    <a href="#">Fiches jeux <span class="car">▾</span></a>
+    <a href="#">Plus <span class="car">▾</span></a>
+  </nav>
+  <button class="search" type="button" aria-label="Rechercher"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.8"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></button>
+</div></header>
+
+<div class="crumbband"><div class="wrap">
+  <div class="crumb"><a href="#">Accueil</a> &gt; <a href="#">Jeux mobile</a> &gt; <a href="#">Tests</a> &gt; <b>Gossip Harbor</b></div>
+  <div class="socials" aria-label="Réseaux sociaux">
+    <a href="#" aria-label="Discord">◉</a><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="X">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="YouTube">▶</a><a href="#" aria-label="Google News">▦</a><a href="#" aria-label="RSS">◔</a>
+    <button type="button" class="toggle" id="themeToggle" aria-label="Basculer clair / sombre"><span></span></button>
+  </div>
+</div></div>
+
+<div class="hero">
+  <div class="hero-art" aria-hidden="true">KEY ART GOSSIP HARBOR · fond plein écran (images.mobi.gg/uploads/…/gossip-harbor-hero.webp)</div>
+  <div class="wrap hero-in">
+    <div>
+      <h1>Test Gossip Harbor : un merge game addictif, mais gourmand en énergie ?</h1>
+      <div class="pills">
+        <a class="pill" href="#"><svg viewBox="0 0 24 24"><path d="M7 9h10v8a1 1 0 0 1-1 1h-1v3h-2v-3h-2v3H9v-3H8a1 1 0 0 1-1-1zm-3 0h2v6H4zm14 0h2v6h-2zM8 8a4 4 0 0 1 8 0z"/></svg>Android</a>
+        <a class="pill" href="#"><svg viewBox="0 0 24 24"><path d="M16 3c0 2-1.5 3.5-3 3.5 0-2 1.5-3.5 3-3.5zM12 7.5c1 0 2-.7 3.3-.7 1.5 0 2.8.9 3.5 2.2-3 1.7-2.4 6 .6 7-.8 2.2-2.3 4.5-3.9 4.5-1.2 0-1.6-.7-3.1-.7s-2 .7-3.2.7C7.4 20.5 5 16.6 5 13c0-3.4 2.2-5.4 4.4-5.4 1.2 0 2 .9 2.6.9z"/></svg>iOS</a>
+        <a class="pill dl" href="#pc"><svg viewBox="0 0 24 24"><path d="M11 3h2v9l3-3 1.4 1.4L12 15.8 6.6 10.4 8 9l3 3zM5 18h14v2H5z"/></svg>Télécharger sur PC</a>
+      </div>
+      <div class="tags">#Merge #Narratif #Rénovation #Casual #Free-to-play</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav class="gametabs" aria-label="Gossip Harbor">
+      <a href="#">GOSSIP HARBOR</a><a class="on" href="#">Test</a><a href="#">Astuces</a><a href="#">Énergie gratuite</a><a href="#">News</a><a href="#">Personnages</a><a href="#">Codes</a>
+    </nav>
+  </div>
+</div>
+
+<div class="anchors"><div class="wrap"><nav class="bar" id="anchors" aria-label="Sommaire">
+  <a href="#verdict" class="on">Verdict</a><a href="#avis">Notre avis</a><a href="#note">Note</a><a href="#telecharger">Télécharger</a><a href="#energie">Énergie gratuite</a><a href="#alternatives">Alternatives</a><a href="#faq">FAQ</a>
+</nav></div></div>
+
+<div class="wrap layout">
+<main>
+
+  <!-- INTRO -->
+  <section id="intro" class="intro">
+    <div class="intro-grid">
+      <div>
+        <p>Welcome to <b>Gossip Harbor</b>, la petite ville côtière où chaque restaurant cache un scandale. Développé par <b>Microfun</b>, ce <b>merge game narratif</b> mélange fusion d'objets, rénovation et feuilleton à rebondissements. Il compte des millions de joueurs sur Android et iOS. Mais que vaut-il vraiment une fois l'énergie épuisée ? <b>Spoiler : addictif, mais la boutique ne vous lâche pas.</b></p>
+      </div>
+      <div><div class="ring" style="--v:62"><span>6.2</span></div><div class="ring-l">Note Mobi.gg</div></div>
+    </div>
+    <div class="author">
+      <div class="av">CP</div>
+      <div class="who"><b>Écrit et testé par <a href="#bio">Camille Pendaries</a></b> (alias Platypousse) · Spécialiste cozy games, 3 semaines de jeu sur Android et iPhone<br>Édité par : <a href="#">Hazulia</a> · Fact-checké par : <a href="#">la rédaction mobi.gg</a></div>
+      <div class="when">Dernière mise à jour :<br><b>30 octobre 2026</b></div>
+    </div>
+    <details class="transp"><summary>ⓘ Transparence : comment nous testons et sommes rémunérés</summary>
+      <div>Chaque jeu est installé sur au moins deux appareils et joué 20 h minimum avant notation. Certains liens de téléchargement peuvent être affiliés : cela ne modifie jamais la note, fixée avant tout partenariat.</div>
+    </details>
+  </section>
+
+  <!-- H2 1 VERDICT -->
+  <section id="verdict">
+    <div class="verdict">
+      <div class="eyebrow">⚡ Verdict en 30 secondes</div>
+      <h2 style="font-size:22px;margin-top:6px">Gossip Harbor vaut-il le coup ?</h2>
+      <p>Oui, si vous aimez les histoires à suspense et les sessions de 5 à 10 minutes. La boucle merge + rénovation est très bien huilée et l'intrigue donne envie de continuer. En revanche, l'énergie se vide vite et les offres payantes apparaissent à chaque pause. Gratuit jouable avec patience. Note : <b>6.2/10</b>.</p>
+      <a class="btn" href="#telecharger">Télécharger Gossip Harbor gratuitement →</a>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section id="screens">
+    <h2 class="h2">Captures et trailer de Gossip Harbor</h2>
+    <div class="shots">
+      <div class="ph play">▶ TRAILER YOUTUBE</div>
+      <div class="ph">CAPTURE 1 · plateau de fusion</div>
+      <div class="ph">CAPTURE 2 · restaurant rénové</div>
+      <div class="ph">CAPTURE 3 · dialogue scénarisé</div>
+      <div class="ph">CAPTURE 4 · événement limité</div>
+    </div>
+  </section>
+
+  <!-- FICHE -->
+  <section id="fiche">
+    <h2 class="h2">Fiche d'identité de Gossip Harbor</h2>
+    <p>Les infos que les joueurs vérifient avant d'installer : éditeur, poids, modèle économique et langue. Relevées en octobre 2026 sur Google Play et l'App Store.</p>
+    <div class="tablebox"><table class="kv">
+      <tr><th>Éditeur</th><td>Microfun</td></tr>
+      <tr><th>Année de sortie</th><td>2022</td></tr>
+      <tr><th>Genre</th><td>Merge-2 narratif / Rénovation</td></tr>
+      <tr><th>Plateformes</th><td>Android · iOS · PC (émulateur)</td></tr>
+      <tr><th>Modèle économique</th><td>Gratuit · achats intégrés de 0,99 € à 99,99 €</td></tr>
+      <tr><th>Durée d'une session</th><td>5 à 10 minutes</td></tr>
+      <tr><th>Classification</th><td>PEGI 12</td></tr>
+      <tr><th>En français ?</th><td>Oui, interface et dialogues</td></tr>
+      <tr><th>Mode hors ligne</th><td>Non</td></tr>
+    </table></div>
+  </section>
+
+  <!-- POINTS -->
+  <section id="points">
+    <div class="procon">
+      <div><h3>Points positifs</h3><ul>
+        <li>Une intrigue à rebondissements qui donne envie de continuer</li>
+        <li>Boucle merge + rénovation très satisfaisante</li>
+        <li>Graphismes soignés et personnages expressifs</li>
+        <li>Événements réguliers avec récompenses utiles</li>
+      </ul></div>
+      <div class="neg"><h3>Points négatifs</h3><ul>
+        <li>Énergie limitée qui coupe vite les sessions</li>
+        <li>Pop-ups d'offres payantes très fréquents</li>
+        <li>Pas de mode hors ligne</li>
+        <li>Plateau vite encombré en milieu de partie</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis">
+    <h2 class="h2">Mon avis sur Gossip Harbor</h2>
+    <p>Commençons par ce qui fait tenir le jeu : <b>l'histoire</b>. Vous incarnez Quinn, qui repart de zéro dans un port de pêche après une trahison. Chaque chapitre débloque un dialogue, un secret de voisinage et une nouvelle pièce à rénover. Ce n'est pas du grand roman, mais <b>le rythme feuilleton marche très bien</b>.</p>
+    <p>Côté gameplay, on fusionne deux objets identiques pour obtenir un objet de niveau supérieur, puis on livre des commandes aux clients du restaurant. <b>La boucle est simple et très satisfaisante</b>, surtout quand une chaîne de fusions libère la moitié du plateau.</p>
+    <p>Le problème arrive vers le chapitre 3 : <b>l'énergie</b>. Chaque générateur consomme de l'énergie, et la recharge naturelle ne suit pas. Le jeu propose alors des packs à chaque pause. On peut jouer gratuitement, mais <b>en acceptant des sessions courtes</b>.</p>
+  </section>
+
+  <!-- NOTE -->
+  <section id="note">
+    <h2 class="h2">Notre note de Gossip Harbor</h2>
+    <p>Note globale de <b>6.2/10</b>, calculée sur 6 critères pendant 3 semaines de jeu sans dépense. L'histoire et la prise en main tirent la note vers le haut ; le modèle économique la fait chuter.</p>
+    <div class="tablebox"><table>
+      <thead><tr><th>Critère</th><th>Note</th><th>Commentaire</th></tr></thead>
+      <tr><td><b>Histoire / Narration</b></td><td class="n hi">8/10</td><td>Rebondissements réguliers, personnages attachants</td></tr>
+      <tr><td><b>Gameplay</b></td><td class="n mid">7/10</td><td>Merge efficace, plateau vite encombré</td></tr>
+      <tr><td><b>Graphismes</b></td><td class="n mid">7.5/10</td><td>Style cartoon soigné, animations fluides</td></tr>
+      <tr><td><b>Modèle économique</b></td><td class="n lo">3/10</td><td>Énergie limitée, offres payantes omniprésentes</td></tr>
+      <tr><td><b>Durée de vie</b></td><td class="n hi">8/10</td><td>Nouveaux chapitres et événements chaque mois</td></tr>
+      <tr><td><b>Prise en main</b></td><td class="n hi">9/10</td><td>Tutoriel clair, jouable à une main</td></tr>
+      <tr class="total"><td>Note globale</td><td class="n">6.2/10</td><td>Correct, mais la boutique pèse sur l'expérience</td></tr>
+    </table></div>
+  </section>
+
+  <!-- H2 2 TÉLÉCHARGER -->
+  <section id="telecharger">
+    <h2 class="h2">Comment télécharger et installer Gossip Harbor ?</h2>
+    <p>Gossip Harbor est gratuit sur les stores officiels. Il pèse environ 250 Mo à l'installation, puis télécharge des données supplémentaires au premier lancement.</p>
+    <ol class="steps">
+      <li><span><b>Ouvrez votre store</b>Google Play sur Android, App Store sur iPhone et iPad.</span></li>
+      <li><span><b>Recherchez « Gossip Harbor »</b>Vérifiez que l'éditeur affiché est bien Microfun.</span></li>
+      <li><span><b>Installez puis lancez le jeu</b>Restez en Wi-Fi : les ressources du premier chapitre se téléchargent au démarrage.</span></li>
+      <li><span><b>Liez votre compte</b>Connectez Facebook ou Google pour ne pas perdre votre progression en changeant de téléphone.</span></li>
+    </ol>
+    <div class="stores"><a class="btn" href="#">▶ Google Play</a><a class="btn" href="#"> App Store</a><a class="btn ghost" href="#pc">🖥 Jouer sur PC</a></div>
+  </section>
+
+  <!-- H2 3 JOUER -->
+  <section id="jouer">
+    <h2 class="h2">Comment jouer à Gossip Harbor ? (tutoriel débutant)</h2>
+    <p>Le principe tient en trois gestes. Une fois compris, toute la partie repose sur la gestion de l'espace et de l'énergie.</p>
+    <ol class="steps">
+      <li><span><b>Touchez un générateur</b>Il fait apparaître un objet de niveau 1 et consomme 1 point d'énergie.</span></li>
+      <li><span><b>Fusionnez deux objets identiques</b>Glissez-les l'un sur l'autre pour obtenir un objet de niveau supérieur.</span></li>
+      <li><span><b>Livrez les commandes</b>Les clients en haut de l'écran réclament des objets précis contre des pièces et de l'XP.</span></li>
+      <li><span><b>Rénovez et avancez dans l'histoire</b>Les étoiles gagnées servent à restaurer le décor et débloquent la scène suivante.</span></li>
+    </ol>
+  </section>
+
+  <!-- H2 4 CONSEILS -->
+  <section id="conseils">
+    <h2 class="h2">5 conseils pour bien démarrer dans Gossip Harbor</h2>
+    <div class="tips">
+      <div class="tip"><div class="k">1</div><h3>Gardez des cases libres</h3><p>Un plateau plein bloque les générateurs. Visez toujours 4 à 5 cases vides.</p></div>
+      <div class="tip"><div class="k">2</div><h3>Fusionnez par 5</h3><p>Fusionner 5 objets d'un coup en donne 2 au niveau supérieur au lieu d'1.</p></div>
+      <div class="tip"><div class="k">3</div><h3>Videz l'énergie avant de quitter</h3><p>La recharge s'arrête au maximum : ne la laissez jamais pleine.</p></div>
+      <div class="tip"><div class="k">4</div><h3>Rangez dans l'inventaire</h3><p>Stockez les objets de haut niveau pour les commandes à venir.</p></div>
+      <div class="tip"><div class="k">5</div><h3>Priorisez les événements</h3><p>Leurs récompenses en énergie dépassent souvent celles de l'histoire principale.</p></div>
+    </div>
+  </section>
+
+  <!-- H2 5 GRATUIT -->
+  <section id="gratuit">
+    <h2 class="h2">Gossip Harbor est-il gratuit ? (modèle économique et microtransactions)</h2>
+    <p>Le jeu est <b>gratuit au téléchargement</b> et l'histoire se termine sans payer. L'argent sert surtout à acheter du temps : énergie, gemmes et cases supplémentaires.</p>
+    <div class="tablebox"><table>
+      <thead><tr><th>Élément payant</th><th>À quoi ça sert</th><th>Utile ?</th></tr></thead>
+      <tr><td><b>Packs d'énergie</b></td><td>Prolonger une session</td><td class="n mid">Parfois</td></tr>
+      <tr><td><b>Gemmes</b></td><td>Accélérer, débloquer des cases, acheter de l'énergie</td><td class="n mid">Parfois</td></tr>
+      <tr><td><b>Passe d'événement</b></td><td>Récompenses doublées pendant l'événement</td><td class="n hi">Le meilleur rapport</td></tr>
+      <tr><td><b>Offres pop-up</b></td><td>Packs « limités » affichés à chaque pause</td><td class="n lo">À éviter</td></tr>
+    </table></div>
+    <div class="callout red" style="margin-top:14px"><span class="i">⚠</span><span>Les offres reviennent à chaque fois que l'énergie tombe à zéro. Activez le contrôle parental des achats intégrés si un enfant utilise votre téléphone.</span></div>
+  </section>
+
+  <!-- H2 6 ÉNERGIE -->
+  <section id="energie">
+    <h2 class="h2">Comment obtenir de l'énergie gratuite dans Gossip Harbor ?</h2>
+    <p>Plusieurs sources gratuites se cumulent chaque jour. Bien combinées, elles doublent facilement votre temps de jeu.</p>
+    <ol class="steps">
+      <li><span><b>Liens de récompense quotidiens</b>Microfun publie des liens d'énergie gratuite sur ses réseaux sociaux. Nous les regroupons sur une page mise à jour chaque jour.</span></li>
+      <li><span><b>Montée de niveau</b>Chaque niveau gagné recharge l'énergie au maximum : gardez une commande prête pour enchaîner.</span></li>
+      <li><span><b>Publicités facultatives</b>Une courte vidéo offre un petit bonus d'énergie, plusieurs fois par jour.</span></li>
+      <li><span><b>Coffres et bulles</b>Certaines bulles sur le plateau contiennent de l'énergie : ouvrez-les avant qu'elles n'expirent.</span></li>
+    </ol>
+    <div class="energy">
+      <div><b>Liens d'énergie gratuite Gossip Harbor</b><p>Liste vérifiée et mise à jour chaque jour par la rédaction.</p></div>
+      <a class="btn" href="#">Voir les liens du jour →</a>
+    </div>
+  </section>
+
+  <!-- H2 7 F2P -->
+  <section id="f2p">
+    <h2 class="h2">Comment progresser sans payer dans Gossip Harbor ?</h2>
+    <p>Notre test s'est fait <b>sans dépenser un euro</b>. Voici ce qui a vraiment fait la différence sur 3 semaines.</p>
+    <div class="tablebox"><table>
+      <thead><tr><th>Habitude</th><th>Effet constaté</th></tr></thead>
+      <tr><td><b>3 à 4 sessions courtes par jour</b></td><td>Énergie jamais gaspillée à plein</td></tr>
+      <tr><td><b>Gemmes gardées pour les cases</b></td><td>Plateau plus grand, moins de blocages</td></tr>
+      <tr><td><b>Liens d'énergie récupérés chaque jour</b></td><td>Environ une session bonus quotidienne</td></tr>
+      <tr><td><b>Participation à chaque événement</b></td><td>Générateurs rares obtenus sans payer</td></tr>
+    </table></div>
+  </section>
+
+  <!-- H2 8 PERSONNAGES -->
+  <section id="personnages">
+    <h2 class="h2">Les personnages de Gossip Harbor : qui sont-ils ?</h2>
+    <p>Le casting est au cœur du jeu : chaque chapitre ajoute un voisin et son lot de secrets.</p>
+    <div class="chars">
+      <div class="char"><div class="ph">PORTRAIT QUINN</div><div><small>Héroïne</small><b>Quinn</b><p>Elle reprend un restaurant sur le port pour tourner la page d'une trahison.</p></div></div>
+      <div class="char"><div class="ph">PORTRAIT [PERSONNAGE 2]</div><div><small>[Rôle]</small><b>[Nom]</b><p>[Description du personnage, son lien avec Quinn et l'intrigue.]</p></div></div>
+      <div class="char"><div class="ph">PORTRAIT [PERSONNAGE 3]</div><div><small>[Rôle]</small><b>[Nom]</b><p>[Description du personnage, son lien avec Quinn et l'intrigue.]</p></div></div>
+    </div>
+  </section>
+
+  <!-- H2 9 PC -->
+  <section id="pc">
+    <h2 class="h2">Comment jouer à Gossip Harbor sur PC avec un émulateur ?</h2>
+    <p>Il n'existe pas de version Windows officielle. Un émulateur Android comme BlueStacks ou LDPlayer permet de jouer à la souris, sur grand écran.</p>
+    <ol class="steps">
+      <li><span><b>Installez un émulateur</b>Téléchargez-le depuis son site officiel uniquement.</span></li>
+      <li><span><b>Connectez votre compte Google</b>L'émulateur donne accès au Google Play Store.</span></li>
+      <li><span><b>Installez Gossip Harbor</b>Comme sur un téléphone, puis liez votre compte pour récupérer votre partie.</span></li>
+    </ol>
+    <div class="callout" style="margin-top:14px"><span class="i">💡</span><span>Liez votre progression à Facebook ou Google avant de passer sur PC : c'est le seul moyen de garder la même partie sur les deux appareils.</span></div>
+  </section>
+
+  <div class="quote">
+    <p>Encore une fusion et j'arrête… promis.</p>
+    <div class="by"><span class="av">CP</span>Platypousse – Mobi.gg</div>
+  </div>
+
+  <!-- BILAN -->
+  <section id="bilan">
+    <div class="bilan"><div class="in">
+      <div class="big"><b>6.2</b><span>/10</span><small>BILAN FINAL</small></div>
+      <div>
+        <h2>Bilan : Gossip Harbor vaut-il le coup ?</h2>
+        <p>Gossip Harbor tient sa promesse de merge game narratif : une histoire prenante, une boucle de fusion efficace et des événements réguliers. Notre test sans payer aboutit à <mark>12 chapitres en 3 semaines</mark>, un rythme correct à condition d'accepter des sessions courtes.</p>
+        <ul><li>Énergie limitée</li><li>Offres payantes envahissantes</li><li>Pas de mode hors ligne</li><li>Plateau vite encombré</li></ul>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ALTERNATIVES -->
+  <section id="alternatives">
+    <h2 class="h2">La meilleure alternative à Gossip Harbor</h2>
+    <p>Si l'énergie de Gossip Harbor vous frustre, Travel Town reprend la même boucle merge avec une économie plus généreuse (voir aussi notre <a href="#">test complet de Travel Town</a>).</p>
+    <div class="vs">
+      <h3>Gossip Harbor VS Travel Town</h3>
+      <div class="vs-grid">
+        <div class="vs-card"><div class="ico">GH</div><b>Gossip Harbor</b>
+          <div class="vs-score"><div class="mini dk" style="--v:62"><span>6.2</span></div><small>Note Mobi.gg</small></div>
+          <ul><li>Histoire plus prenante</li><li>Personnages plus travaillés</li><li>Événements fréquents</li></ul><a class="btn ghost-d" href="#">Voir sa fiche →</a></div>
+        <div class="vs-mid">VS</div>
+        <div class="vs-card rec"><span class="badge">RECOMMANDÉ</span><div class="ico">TT</div><b>Travel Town</b>
+          <div class="vs-score"><div class="mini dk" style="--v:74"><span>7.4</span></div><small>Note Mobi.gg</small></div>
+          <ul><li>Énergie plus généreuse</li><li>Moins de pop-ups</li><li>Plateau plus lisible</li></ul><a class="btn" href="#">Voir le test →</a></div>
+      </div>
+
+      <div class="vs-table">
+        <table>
+          <thead><tr><th>Critère</th><th>Gossip Harbor</th><th>Travel Town</th></tr></thead>
+          <tr><td>Genre</td><td>Merge-2 narratif + rénovation</td><td>Merge-2 + construction de ville</td></tr>
+          <tr><td>Éditeur</td><td>Microfun</td><td>Magmatic Games</td></tr>
+          <tr><td>Histoire</td><td class="win">Feuilleton à rebondissements</td><td>Légère, au service de la ville</td></tr>
+          <tr><td>Personnages</td><td class="win">Nombreux et développés</td><td>Peu présents</td></tr>
+          <tr><td>Énergie</td><td>Se vide vite, recharge lente</td><td class="win">Plus généreuse au quotidien</td></tr>
+          <tr><td>Offres payantes</td><td>Pop-ups à chaque pause</td><td class="win">Plus discrètes</td></tr>
+          <tr><td>Lisibilité du plateau</td><td>Vite encombré</td><td class="win">Plus d'espace, meilleur tri</td></tr>
+          <tr><td>Événements</td><td class="win">Très fréquents</td><td>Réguliers</td></tr>
+          <tr><td>Mode hors ligne</td><td>Non</td><td>Non</td></tr>
+          <tr><td>En français</td><td>Oui</td><td>Oui</td></tr>
+          <tr><td>Session idéale</td><td>5 à 10 min</td><td>10 à 20 min</td></tr>
+          <tr><td>Idéal pour</td><td>Fans d'histoires et de drama</td><td>Joueurs qui veulent jouer plus longtemps sans payer</td></tr>
+        </table>
+      </div>
+      <p class="vs-verdict"><b>Notre choix :</b> Travel Town si l'énergie vous frustre, Gossip Harbor si c'est l'histoire qui vous fait revenir.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <h2 class="h2">Foire aux questions (FAQ)</h2>
+    <details open><summary>Gossip Harbor est-il disponible en français ?</summary><p>Oui. L'interface, les dialogues et les événements sont entièrement traduits en français.</p></details>
+    <details><summary>Peut-on jouer à Gossip Harbor hors ligne ?</summary><p>Non. Une connexion Internet est nécessaire pour lancer le jeu et synchroniser la progression.</p></details>
+    <details><summary>Gossip Harbor est-il adapté aux enfants ?</summary><p>Le jeu est classé PEGI 12. Les thèmes restent légers, mais pensez à bloquer les achats intégrés.</p></details>
+    <details><summary>Combien de temps faut-il pour finir Gossip Harbor ?</summary><p>Il n'y a pas de vraie fin : de nouveaux chapitres et événements arrivent régulièrement.</p></details>
+    <details><summary>Comment récupérer ma partie sur un nouveau téléphone ?</summary><p>Liez votre compte Facebook ou Google dans les paramètres, puis connectez-vous avec le même compte sur le nouvel appareil.</p></details>
+  </section>
+
+</main>
+
+<!-- SIDEBAR DROITE -->
+<aside aria-label="Résumé du test">
+  <div class="card">
+    <div class="score-top">GOSSIP HARBOR</div>
+    <div class="score-dark">
+      <div class="row">
+        <div><div class="num">6.2<span>/10</span></div><div class="stars">★★★☆☆</div></div>
+        <div class="sum">EN RÉSUMÉ<em>CORRECT MAIS PRÉDATEUR</em></div>
+      </div>
+      <hr>
+      <div class="pl">AVIS DES JOUEURS : <b>MITIGÉS</b></div>
+      <small>Évalué par 1 248 utilisateurs</small>
+    </div>
+    <div class="side-row"><span>FR · Disponible en français</span><span style="color:var(--good)">✓</span></div>
+    <div class="side-row"><span><small>MODÈLE ÉCONOMIQUE</small>Gratuit · Microtransactions <span class="warn">⚠ agressives</span></span></div>
+    <a class="btn" href="#telecharger">⤓ Télécharger Gossip Harbor</a>
+  </div>
+
+  <div class="card prate" style="border-radius:28px">
+    <div class="head">
+      <div class="oring" style="--v:58"><span><span style="display:block;width:auto;aspect-ratio:auto;background:none"><b>5.8</b><small>1 248 votes</small></span></span></div>
+      <strong>Note des joueurs sur Gossip Harbor</strong>
+    </div>
+    <div class="body">
+      <div class="rate-l">Votre note <span id="myrate">0</span></div>
+      <div class="rate" id="rate" role="group" aria-label="Votre note sur 10"><span class="lab">Note</span></div>
+    </div>
+  </div>
+
+  <div class="ph adph">EMPLACEMENT PUB 300×250</div>
+
+  <div class="card"><div class="pad">
+    <h4>⭐ Note détaillée</h4>
+    <div class="bars">
+      <div><div class="l">Histoire / Narration<b class="hi">8/10</b></div><div class="t"><i style="width:80%"></i></div></div>
+      <div><div class="l">Gameplay<b class="mid">7/10</b></div><div class="t"><i style="width:70%"></i></div></div>
+      <div><div class="l">Graphismes<b class="mid">7.5/10</b></div><div class="t"><i style="width:75%"></i></div></div>
+      <div><div class="l">Modèle économique<b class="lo">3/10</b></div><div class="t"><i style="width:30%"></i></div></div>
+      <div><div class="l">Durée de vie<b class="hi">8/10</b></div><div class="t"><i style="width:80%"></i></div></div>
+      <div><div class="l">Prise en main<b class="hi">9/10</b></div><div class="t"><i style="width:90%"></i></div></div>
+    </div>
+  </div></div>
+
+  <div class="card">
+    <div class="pad"><h4>🧩 Fonctionnalités</h4><div class="chips">
+      <span class="chip">Histoire scénarisée</span><span class="chip">Merge-2</span><span class="chip">Personnages variés</span><span class="chip">Rénovation</span><span class="chip">Événements limités</span><span class="chip r">Pas de mode hors ligne</span>
+    </div></div>
+    <div class="pad sep"><h4>🎯 Public cible</h4><div class="chips">
+      <span class="chip r">Amateurs de récits</span><span class="chip r">Joueurs casual</span><span class="chip r">Sessions courtes</span><span class="chip r">Fans de merge</span>
+    </div></div>
+    <div class="pad sep"><h4>🛡 Sécurité et conformité</h4><div class="chips">
+      <span class="chip a">RGPD conforme</span><span class="chip a">PEGI 12</span><span class="chip a">Achats in-app</span><span class="chip a">Publicités</span>
+    </div></div>
+    <div class="pad sep" style="background:var(--soft)"><h4>Informations Gossip Harbor</h4><div class="info">
+      <div><span>Langue</span><b>Français</b></div>
+      <div><span>Plateformes</span><b>Android · iOS · PC</b></div>
+      <div><span>Session</span><b>5 à 10 minutes</b></div>
+      <div><span>Énergie</span><b><a href="#energie">Voir les liens gratuits</a></b></div>
+      <div><span>Éditeur</span><b>Microfun</b></div>
+      <div><span>Année</span><b>2022</b></div>
+    </div></div>
+  </div>
+
+  <div class="card"><div class="pad">
+    <h4>📊 Avis externes</h4><div class="info">
+      <div><span>Google Play</span><b>[x,x]/5</b></div>
+      <div><span>App Store</span><b>[x,x]/5</b></div>
+      <div><span>Reddit FR</span><b>Mitigé</b></div>
+      <div><span>Mobi.gg</span><b>6.2/10</b></div>
+    </div>
+  </div></div>
+
+  <div class="tipcard">
+    <span class="eyebrow">💡 Le conseil de Camille</span>
+    Videz votre énergie juste avant de monter de niveau : la recharge complète offerte au passage de niveau n'est alors pas gaspillée.
+    <br><a class="btn" href="#conseils">Voir les 5 conseils →</a>
+  </div>
+
+  <div class="ph adph" style="height:600px">EMPLACEMENT PUB 300×600</div>
+</aside>
+</div>
+
+<!-- BANDEAU FINAL mobi.gg -->
+<div class="final"><div class="wrap">
+  <div><div class="ring" style="--v:62"><span>6.2</span></div><div class="ring-l">Mobi.gg</div></div>
+  <div class="fbars">
+    <div class="fbar" style="width:80%">Histoire - 8</div>
+    <div class="fbar" style="width:70%">Gameplay - 7</div>
+    <div class="fbar" style="width:75%">Graphismes - 7.5</div>
+    <div class="fbar" style="width:80%">Durée de vie - 8</div>
+    <div class="fbar" style="width:34%;min-width:170px">Modèle éco - 3</div>
+  </div>
+  <div class="fdl"><b>Télécharger</b><a href="#">▶ Google Play</a><a href="#"> App Store</a><a href="#pc">🖥 PC</a></div>
+</div></div>
+
+<div class="wrap" style="display:flex;flex-direction:column;gap:32px;padding-block:40px">
+  <div class="bio" id="bio">
+    <div class="av">CP</div>
+    <div><small style="color:var(--muted)">Écrit et testé par :</small><br><b style="color:var(--blue);font-size:20px">Camille Pendaries</b> <small style="color:var(--muted)">alias Platypousse · in</small>
+      <p>Spécialiste des cozy games et des jeux de réflexion sur iPhone, Camille touche à tout le jeu mobile. Sur Mobi.gg, elle partage astuces, guides et actualités du secteur au quotidien.</p></div>
+  </div>
+
+  <div>
+    <h2 class="h2">Tests similaires</h2>
+    <div class="similar">
+      <div class="sim"><div class="ph">ICÔNE</div><div><b>Test de Travel Town</b><small>#Merge #Casual</small></div><div class="mini" style="--v:74"><span>7.4</span></div></div>
+      <div class="sim"><div class="ph">ICÔNE</div><div><b>Test de Merge Mansion</b><small>#Merge #Enquête</small></div><div class="mini" style="--v:70"><span>7</span></div></div>
+      <div class="sim"><div class="ph">ICÔNE</div><div><b>Test de Love &amp; Pies</b><small>#Merge #Romance</small></div><div class="mini" style="--v:72"><span>7.2</span></div></div>
+      <div class="sim"><div class="ph">ICÔNE</div><div><b>Test de June's Journey</b><small>#Objets cachés</small></div><div class="mini" style="--v:76"><span>7.6</span></div></div>
+    </div>
+  </div>
+
+  <form class="comments" id="cform">
+    <h2 class="h2">Commentaires</h2>
+    <p>Vous jouez à Gossip Harbor ? Donnez votre avis sur l'énergie et les microtransactions.</p>
+    <label for="cmt" class="eyebrow">Votre commentaire</label>
+    <textarea id="cmt" placeholder="Votre avis sur Gossip Harbor…"></textarea>
+    <button class="btn" type="submit">Publier mon commentaire</button> <span id="cmsg" style="color:var(--good);font-weight:700"></span>
+  </form>
+</div>
+
+<footer><div class="wrap"><span class="logo">mobi.gg</span><br>Copyright © 2026 Mobi.gg. Tous droits réservés.</div></footer>
+
+<script>
+// Note utilisateur
+const rate=document.getElementById('rate'),out=document.getElementById('myrate');
+let saved=null;try{saved=localStorage.getItem('gh-rate')}catch(e){}
+for(let i=1;i<=10;i++){const b=document.createElement('button');b.type='button';b.textContent=i;b.setAttribute('aria-label',i+' sur 10');
+  b.onclick=()=>{set(i);try{localStorage.setItem('gh-rate',i)}catch(e){}};rate.appendChild(b)}
+function set(v){[...rate.querySelectorAll('button')].forEach((b,k)=>b.classList.toggle('on',k+1===+v));out.textContent=v}
+if(saved)set(saved);
+// Sidebar qui défile avec la page puis se cale en bas quand elle est plus haute que l'écran
+const aside=document.querySelector('aside');
+function placeAside(){
+  if(getComputedStyle(aside).position!=='sticky')return;
+  const room=window.innerHeight-aside.offsetHeight-16;
+  aside.style.top=Math.min(84,room)+'px';
+}
+addEventListener('resize',placeAside);addEventListener('load',placeAside);placeAside();
+// Bascule clair / sombre
+const root=document.documentElement;
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme=dark?'light':'dark';
+});
+// Nav active
+const links=[...document.querySelectorAll('#anchors a')];
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on)a.scrollIntoView({block:'nearest',inline:'nearest'})})}})},{rootMargin:'-40% 0px -55% 0px'});
+links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s)obs.observe(s)});
+document.getElementById('cform').addEventListener('submit',e=>{e.preventDefault();document.getElementById('cmsg').textContent='Commentaire envoyé en modération.'});
+</script>
